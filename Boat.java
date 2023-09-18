@@ -76,7 +76,7 @@ public class Boat {
     Boat sail = new Boat(2, 13.0, "sail");
     System.out.println("\nFIshing information");
     System.out.println("Num of people: " + sail.numOfPeople);
-   
+   //commit already mbruh
     System.out.println("Speed: " + sail.speed);
     System.out.println("Powersource: " + sail.powerSource);
   }// end public void main
