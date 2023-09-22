@@ -8,15 +8,11 @@ and number of pizza's ordered.  It reads the file line by line,
 splits each line into parts using a comma as a delimeter, and calculates the total and average number of pizza's ordered while
 handling errors like file not found or invalid number format.
 */
-
+//Task: add more data to the CSV at least 3 weeks worth to show that totalpizzas and average work
 // imports required
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Scanner;
 
 // note class is not named CsvFileEx - this should cause an
@@ -30,21 +26,43 @@ public class CsvFileEx {
       //Create a scanner to read the  CSV file
       File file = new File("pizzaorders.csv");
       Scanner filescanner = new Scanner(file);
-      
+
+      if(filescanner.hasNextLine()){//skip first line
+        filescanner.nextLine();
+      }
+
+
       while(filescanner.hasNextLine()){//read each line, and split it into parts using the delimiter
         String line = filescanner.nextLine();
         String[] parts = line.split(",");
         if (parts.length == 2) {
             String dayOfWeek = parts[0].trim();
+            int pizzasordered = Integer.parseInt(parts[1].trim());//convert pizzas ordered from string to int
+            //update total and count
+            totalPizzas += pizzasordered;
+            dayCount++;
+
+            System.out.println("Day: " + dayOfWeek + "Pizzas ordered: " + pizzasordered);
+
+        } else {
+          System.out.println("Invalid" + line);
         }
 
+      }
+
+      //calculate and display results
+      if (dayCount > 0) {
+        double averagepizzas = (double)totalPizzas/dayCount;
+        System.out.println("Total pizzas ordered: "+totalPizzas);
+        System.out.println("avg pizzas ordered: "+averagepizzas);
+      } else {
+        System.out.println("Something weird happened. Invalid data found in csv");
       }
 
       
      
 
-    //make a list to store the data
-      List<String[]>data = new ArrayList<>();
+   
       // loop through each line in the file
 
 
